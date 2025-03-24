@@ -70,6 +70,10 @@ body {
     border: 1px solid #c3e6cb;
 }
 
+.mr-4 {
+    margin-right: 0.25rem;
+}
+
 .mt-4 {
     margin-top: 0.25rem;
 }

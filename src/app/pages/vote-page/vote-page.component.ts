@@ -39,7 +39,7 @@ export default class VotePageComponent implements OnInit {
     }
     
     private loadCandidates() {
-        this.candidateService.getCandidates().subscribe({
+        this.candidateService.getAll().subscribe({
             next: (candidates) => this.candidates.set(candidates),
             error: (err) => this.error.set('Failed to load candidates. Please try again later.')
         });
@@ -56,7 +56,7 @@ export default class VotePageComponent implements OnInit {
                 candidateVotedId: parseInt(this.voteForm.get('candidateVotedId')?.value, 10)
             };
             
-            this.voteService.submitVote(vote).subscribe({
+            this.voteService.create(vote).subscribe({
                 next: () => {
                     this.success.set(true);
                     this.voteForm.reset();

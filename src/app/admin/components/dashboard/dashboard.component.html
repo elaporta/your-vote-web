@@ -1,0 +1,25 @@
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="card mt-8">
+        <h3 class="text-xl font-bold mb-4">Most voted candidates 👥</h3>
+
+        @if (loading()) {
+            <p>Loading statistics...</p>
+        } @else {
+            <div>
+                <!-- list here -->
+            </div>
+        }
+    </div>
+
+    <div class="card">
+        <h3 class="text-xl font-bold mb-4">Registered Votes 🗳️</h3>
+
+        @if (loading()) {
+            <p>Loading activity...</p>
+        } @else {
+            <div>
+                <!-- list here -->
+            </div>
+        }
+    </div>
+</div>

@@ -1,4 +1,4 @@
-export interface Candidate {
+export interface Voter {
     id?: number;
     name: string;
     lastName: string;
@@ -7,5 +7,4 @@ export interface Candidate {
     address: string;
     phone: string;
     gender: string;
-    receivedVotesCount?: number;
 }

@@ -1,0 +1,128 @@
+<div class="card">
+    <h2 class="text-2xl font-bold mb-16">Voter Registration 👥</h2>
+    
+    <form [formGroup]="voterForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" formControlName="name" class="form-control">
+
+            @if (voterForm.get('name')?.errors?.['required'] && voterForm.get('name')?.touched) {
+                <div class="text-red-500 text-sm mt-1">Name is required</div>
+            }
+            @if (voterForm.get('name')?.errors?.['maxlength']) {
+                <div class="text-red-500 text-sm mt-1">Name cannot exceed 255 characters</div>
+            }
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" formControlName="lastName" class="form-control">
+
+            @if (voterForm.get('lastName')?.errors?.['required'] && voterForm.get('lastName')?.touched) {
+                <div class="text-red-500 text-sm mt-1">Last name is required</div>
+            }
+            @if (voterForm.get('lastName')?.errors?.['maxlength']) {
+                <div class="text-red-500 text-sm mt-1">Last name cannot exceed 255 characters</div>
+            }
+        </div>
+
+        <div class="form-group">
+            <label for="document">Document</label>
+            <input type="text" id="document" formControlName="document" class="form-control">
+
+            @if (voterForm.get('document')?.errors?.['invalidDocument'] && voterForm.get('document')?.touched) {
+                <div class="text-red-500 text-sm mt-1">{{ voterForm.get('document')?.errors?.['invalidDocument'] }}</div>
+            }
+        </div>
+
+        <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" formControlName="dob" class="form-control">
+
+            @if (voterForm.get('dob')?.errors?.['required'] && voterForm.get('dob')?.touched) {
+                <div class="text-red-500 text-sm mt-1">Date of birth is required</div>
+            }
+            @if (voterForm.get('dob')?.errors?.['pattern']) {
+                <div class="text-red-500 text-sm mt-1">Invalid date format (YYYY-MM-DD)</div>
+            }
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" id="address" formControlName="address" class="form-control">
+
+            @if (voterForm.get('address')?.errors?.['required'] && voterForm.get('address')?.touched) {
+                <div class="text-red-500 text-sm mt-1">Address is required</div>
+            }
+            @if (voterForm.get('address')?.errors?.['minlength']) {
+                <div class="text-red-500 text-sm mt-1">Address must be at least 1 character</div>
+            }
+            @if (voterForm.get('address')?.errors?.['maxlength']) {
+                <div class="text-red-500 text-sm mt-1">Address cannot exceed 255 characters</div>
+            }
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" formControlName="phone" class="form-control">
+
+            @if (voterForm.get('phone')?.errors?.['required'] && voterForm.get('phone')?.touched) {
+                <div class="text-red-500 text-sm mt-1">Phone is required</div>
+            }
+            @if (voterForm.get('phone')?.errors?.['minlength']) {
+                <div class="text-red-500 text-sm mt-1">Phone must be at least 1 character</div>
+            }
+            @if (voterForm.get('phone')?.errors?.['maxlength']) {
+                <div class="text-red-500 text-sm mt-1">Phone cannot exceed 255 characters</div>
+            }
+        </div>
+
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender" formControlName="gender" class="form-control">
+                <option value="" disabled>Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+
+            @if (voterForm.get('gender')?.errors?.['required'] && voterForm.get('gender')?.touched) {
+                <div class="text-red-500 text-sm mt-1">Gender is required</div>
+            }
+            @if (voterForm.get('gender')?.errors?.['pattern']) {
+                <div class="text-red-500 text-sm mt-1">Invalid gender selection</div>
+            }
+        </div>
+
+        <div class="form-group">
+            <label class="flex items-center">
+                <input type="checkbox" formControlName="isCandidate" class="mr-4">
+                Register as Candidate
+            </label>
+        </div>
+        
+        <div class="flex gap-4">
+            <button type="submit" class="btn btn-primary" [disabled]="voterForm.invalid || loading()">
+                {{ loading() ? 'Submitting...' : 'Submit' }}
+            </button>
+            <a routerLink="/admin/dashboard" class="btn btn-secondary">Cancel</a>
+        </div>
+
+        
+    </form>
+
+    <!-- messages -->
+    <div class="mt-8">
+        @if (success()) {
+            <div class="alert alert-success mb-4">
+                Voter registered successfully!
+            </div>
+        }
+        
+        @if (error()) {
+            <div class="alert alert-danger mb-4">
+                {{ error() }}
+            </div>
+        }
+    </div>
+</div>

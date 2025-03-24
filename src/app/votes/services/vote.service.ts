@@ -1,18 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
+// Interfaces
 import { Vote } from '../interfaces/vote.interface';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class VoteService {
-  private readonly API_URL = 'http://127.0.0.1:8000/vote';
+    private readonly API_URL = 'http://127.0.0.1:8000/vote';
 
-  constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {}
 
-  submitVote(vote: Vote): Observable<any> {
-    return this.http.post(this.API_URL, vote);
-  }
+    getAll(): Observable<Vote[]> {
+        return this.http.get<{data: Vote[]}>(this.API_URL).pipe(
+            map((response: {data: Vote[]}) => response.data)
+        );
+    }
+
+    create(vote: Vote): Observable<any> {
+        return this.http.post(this.API_URL, vote);
+    }
 }

@@ -16,7 +16,7 @@ export class PasswordComponent {
     loading = signal(false);
     error = signal('');
     success = signal(false);
-    
+
     constructor(
         private fb: FormBuilder,
         private authService: AuthService
@@ -27,20 +27,20 @@ export class PasswordComponent {
             newPasswordConfirmation: ['', Validators.required]
         }, { validators: this.passwordMatchValidator });
     }
-    
+
     passwordMatchValidator(form: FormGroup) {
         const newPassword = form.get('newPassword')?.value;
         const newPasswordConfirmation = form.get('newPasswordConfirmation')?.value;
         return newPassword === newPasswordConfirmation ? null : { passwordMismatch: true };
     }
-    
+
     onSubmit() {
         this.loading.set(true);
         this.error.set('');
         this.success.set(false);
 
         const { password, newPassword, newPasswordConfirmation } = this.passwordForm.value;
-        
+
         this.authService.updatePassword(password, newPassword, newPasswordConfirmation).subscribe({
             next: () => {
                 this.success.set(true);

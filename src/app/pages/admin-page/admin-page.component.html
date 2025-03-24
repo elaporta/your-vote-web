@@ -2,12 +2,11 @@
     <nav class="admin-nav card mb-4">
         <ul class="flex gap-4">
             <a routerLink="/admin/dashboard" class="nav-link" [class.active]="router.url === '/admin/dashboard'">Dashboard</a>
-            <a routerLink="/admin/candidate" class="nav-link" [class.active]="router.url === '/admin/candidate'">Candidate+</a>
-            <a routerLink="/admin/voter" class="nav-link" [class.active]="router.url === '/admin/voter'">Voter+</a>
+            <a routerLink="/admin/voter" class="nav-link" [class.active]="router.url === '/admin/voter'">New Voter</a>
             <a routerLink="/admin/password" class="nav-link" [class.active]="router.url === '/admin/password'">Change Password</a>
             <a class="nav-link" (click)="logout()">Log out</a>
         </ul>
     </nav>
-    
+
     <router-outlet></router-outlet>
 </div>
