@@ -52,7 +52,12 @@
                         <div class="vote-item">
                             <div class="vote-info">
                                 <div class="voter-details">
-                                    <span class="voter-name">{{vote.voter.name}} {{vote.voter.lastName}}</span>
+                                    <div class="name-action-group">
+                                        <span class="voter-name">{{vote.voter.name}} {{vote.voter.lastName}}</span>
+                                        <a href="javascript:void(0)" class="details-btn" (click)="showVoteDetails(vote)" title="Complete vote details">
+                                            View Details 📑
+                                        </a>
+                                    </div>
                                     <span class="vote-date">{{vote.date | date:'medium'}}</span>
                                 </div>
                                 <span class="candidate-voted">Voted for: {{vote.candidate.name}} {{vote.candidate.lastName}}</span>
@@ -76,3 +81,6 @@
         }
     </div>
 </div>
+
+<!-- Vote Details Modal -->
+<app-vote-view [vote]="selectedVote()" [show]="showModal()" (close)="closeModal()"></app-vote-view>

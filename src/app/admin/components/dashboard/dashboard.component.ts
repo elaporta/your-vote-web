@@ -6,6 +6,9 @@ import { RouterModule, Router } from '@angular/router';
 import { VoteService } from '../../../votes/services/vote.service';
 import { CandidateService } from '../../../candidates/services/candidate.service';
 
+// Components
+import { VoteViewComponent } from '../vote-view/vote-view.component';
+
 // Interfaces
 import { Vote } from '../../../votes/interfaces/vote.interface';
 import { Candidate } from '../../../candidates/interfaces/candidate.interface';
@@ -15,14 +18,17 @@ import { Candidate } from '../../../candidates/interfaces/candidate.interface';
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css'],
     standalone: true,
-    imports: [CommonModule, RouterModule, /*NgChartsModule, ChartModule*/]
+    imports: [CommonModule, RouterModule, VoteViewComponent]
 })
 export class DashboardComponent implements OnInit {
+    votes = signal<Vote[]>([]);
+    candidates = signal<Candidate[]>([]);
+
     loadingVotes = signal(true);
     loadingCandidates = signal(true);
 
-    votes = signal<Vote[]>([]);
-    candidates = signal<Candidate[]>([]);
+    selectedVote = signal<Vote | null>(null);
+    showModal = signal(false);
 
     currentCandidatePage = signal(1);
     currentVotePage = signal(1);
@@ -54,30 +60,6 @@ export class DashboardComponent implements OnInit {
         this.fetchCandidates();
     }
 
-    nextCandidatePage() {
-        if (this.currentCandidatePage() < this.totalCandidatePages()) {
-            this.currentCandidatePage.update(page => page + 1);
-        }
-    }
-
-    previousCandidatePage() {
-        if (this.currentCandidatePage() > 1) {
-            this.currentCandidatePage.update(page => page - 1);
-        }
-    }
-
-    nextVotePage() {
-        if (this.currentVotePage() < this.totalVotePages()) {
-            this.currentVotePage.update(page => page + 1);
-        }
-    }
-
-    previousVotePage() {
-        if (this.currentVotePage() > 1) {
-            this.currentVotePage.update(page => page - 1);
-        }
-    }
-
     private fetchVotes() {
         this.loadingVotes.set(true);
         this.voteService.getAll().subscribe({
@@ -104,5 +86,39 @@ export class DashboardComponent implements OnInit {
                 this.loadingCandidates.set(false);
             }
         });
+    }
+
+    nextCandidatePage() {
+        if (this.currentCandidatePage() < this.totalCandidatePages()) {
+            this.currentCandidatePage.update(page => page + 1);
+        }
+    }
+
+    previousCandidatePage() {
+        if (this.currentCandidatePage() > 1) {
+            this.currentCandidatePage.update(page => page - 1);
+        }
+    }
+
+    nextVotePage() {
+        if (this.currentVotePage() < this.totalVotePages()) {
+            this.currentVotePage.update(page => page + 1);
+        }
+    }
+
+    previousVotePage() {
+        if (this.currentVotePage() > 1) {
+            this.currentVotePage.update(page => page - 1);
+        }
+    }
+
+    showVoteDetails(vote: Vote) {
+        this.selectedVote.set(vote);
+        this.showModal.set(true);
+    }
+
+    closeModal() {
+        this.showModal.set(false);
+        this.selectedVote.set(null);
     }
 }

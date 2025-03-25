@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 // Interfaces
 import { Vote, SubmitVote } from '../interfaces/vote.interface';
@@ -9,7 +10,7 @@ import { Vote, SubmitVote } from '../interfaces/vote.interface';
     providedIn: 'root'
 })
 export class VoteService {
-    private readonly API_URL = 'http://127.0.0.1:8000/vote';
+    private readonly API_URL = environment.apiUrl + '/vote';
 
     constructor(private http: HttpClient) {}
 

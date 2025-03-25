@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 // Interfaces
 import { Candidate } from '../interfaces/candidate.interface';
@@ -10,7 +11,7 @@ import { Candidate } from '../interfaces/candidate.interface';
     providedIn: 'root'
 })
 export class CandidateService {
-    private readonly API_URL = 'http://127.0.0.1:8000/candidate';
+    private readonly API_URL = environment.apiUrl + '/candidate';
 
     constructor(private http: HttpClient) {}
 

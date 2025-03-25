@@ -92,3 +92,34 @@
     color: #4a5568;
     font-size: 0.875rem;
 }
+
+.vote-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.name-action-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.details-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.15rem 0.5rem;
+    background-color: #edf2f7;
+    color: #4a5568;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.details-btn:hover {
+    background-color: #e2e8f0;
+    transform: scale(1.05);
+}

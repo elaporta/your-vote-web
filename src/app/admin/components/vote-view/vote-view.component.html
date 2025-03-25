@@ -1,0 +1,28 @@
+@if (show) {
+    <div class="modal-overlay" (click)="onClose()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            @if (vote) {
+                <div class="modal-header">
+                    <h2 class="text-xl font-bold">Vote Details 📑</h2>
+                    <button class="close-btn" (click)="onClose()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="detail-group">
+                        <h3 class="font-semibold">Voter Information</h3>
+                        <p>Name: {{vote.voter.name}} {{vote.voter.lastName}}</p>
+                        <p>Document: {{vote.voter.document}}</p>
+                        <p>Gender: {{vote.voter.gender}}</p>
+                        <p>Date of birth: {{vote.voter.dob | date:'mediumDate'}}</p>
+                        <p>Address: {{vote.voter.address}}</p>
+                        <p>Phone: {{vote.voter.phone}}</p>
+                    </div>
+                    <div class="detail-group">
+                        <h3 class="font-semibold">Vote Information</h3>
+                        <p>Date: {{vote.date | date:'medium'}}</p>
+                        <p>Candidate: {{vote.candidate.name}} {{vote.candidate.lastName}}</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+} 
