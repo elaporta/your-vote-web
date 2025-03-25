@@ -1,6 +1,6 @@
-# Your Vote WEB 🗳️
+# 🗳️ Your Vote Web
 
-A web voting system built with Angular , providing secure and efficient vote management.
+A web voting system built with Angular 19, providing secure and efficient vote management.
 
 ## 🚀 Quick Start
 
@@ -14,7 +14,7 @@ A web voting system built with Angular , providing secure and efficient vote man
    ```bash
    npm i
    ```
-3. Configure environment files with the API url (http://127.0.0.1:8000 by default):
+3. Configure environment files with the API url.
    ```bash
    default: ./src/environments/environment.ts
    development: ./src/environments/environment.development.ts
