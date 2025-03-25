@@ -4,7 +4,7 @@ import { Routes } from '@angular/router';
 import { AdminPageComponent } from '../pages/admin-page/admin-page.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PasswordComponent } from './components/password/password.component';
-import { VoterFormComponent } from '../voter/components/voter-form/voter-form.component';
+import { VoterFormComponent } from './components/voter-form/voter-form.component';
 
 // Guard
 import { AuthGuard } from '../auth/guards/auth.guard';

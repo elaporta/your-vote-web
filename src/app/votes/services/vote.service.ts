@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
 // Interfaces
-import { Vote } from '../interfaces/vote.interface';
+import { Vote, SubmitVote } from '../interfaces/vote.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -19,7 +19,7 @@ export class VoteService {
         );
     }
 
-    create(vote: Vote): Observable<any> {
+    create(vote: SubmitVote): Observable<any> {
         return this.http.post(this.API_URL, vote);
     }
 }

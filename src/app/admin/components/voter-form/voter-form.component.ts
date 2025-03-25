@@ -4,11 +4,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractContro
 import { RouterModule } from '@angular/router';
 
 // Services
-import { VoterService } from '../../services/voter.service';
+import { VoterService } from '../../../voter/services/voter.service';
 import { CandidateService } from '../../../candidates/services/candidate.service';
 
 // Interfaces
-import { Voter } from '../../interfaces/voter.interface';
+import { Voter } from '../../../voter/interfaces/voter.interface';
 
 // Validators
 import { uruguayanDocumentValidator } from '../../../shared/validators/uruguayan-document.validator';
@@ -50,7 +50,7 @@ export class VoterFormComponent {
         const voter: Voter = {
             name: this.voterForm.value.name,
             lastName: this.voterForm.value.lastName,
-            document: this.voterForm.value.document,
+            document: this.voterForm.value.document.replace(/\D/g, ''),
             dob: this.voterForm.value.dob,
             address: this.voterForm.value.address,
             phone: this.voterForm.value.phone,

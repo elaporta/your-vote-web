@@ -10,6 +10,9 @@ import { VoteService } from '../../votes/services/vote.service';
 // Interfaces
 import { Candidate } from '../../candidates/interfaces/candidate.interface';
 
+// Validators
+import { uruguayanDocumentValidator } from '../../shared/validators/uruguayan-document.validator';
+
 @Component({
     selector: 'app-vote-page',
     templateUrl: './vote-page.component.html',
@@ -29,7 +32,7 @@ export default class VotePageComponent implements OnInit {
         private voteService: VoteService
     ) {
         this.voteForm = this.fb.group({
-            document: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
+            document: ['', [Validators.required, uruguayanDocumentValidator()]],
             candidateVotedId: ['', Validators.required]
         });
     }
@@ -52,7 +55,7 @@ export default class VotePageComponent implements OnInit {
             this.success.set(false);
             
             const vote = {
-                document: this.voteForm.get('document')?.value,
+                document: this.voteForm.get('document')?.value.replace(/\D/g, ''),
                 candidateVotedId: parseInt(this.voteForm.get('candidateVotedId')?.value, 10)
             };
             

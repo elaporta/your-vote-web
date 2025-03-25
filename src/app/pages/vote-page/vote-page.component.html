@@ -9,11 +9,8 @@
             <label for="document">Document</label>
             <input type="text" id="document" formControlName="document" class="form-control" placeholder="Enter your document">
 
-            @if (voteForm.get('document')?.errors?.['required'] && voteForm.get('document')?.touched) {
-                <div class="text-red-500 text-sm mt-4">Document is required</div>
-            }
-            @if (voteForm.get('document')?.errors?.['pattern']) {
-                <div class="text-red-500 text-sm mt-4">Document must be 8 digits</div>
+            @if (voteForm.get('document')?.errors?.['invalidDocument'] && voteForm.get('document')?.touched) {
+                <div class="text-red-500 text-sm mt-1">{{ voteForm.get('document')?.errors?.['invalidDocument'] }}</div>
             }
         </div>
 

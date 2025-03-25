@@ -2,11 +2,36 @@
     <div class="card mt-8">
         <h3 class="text-xl font-bold mb-4">Most voted candidates 👥</h3>
 
-        @if (loading()) {
+        @if (loadingCandidates()) {
             <p>Loading statistics...</p>
         } @else {
-            <div>
-                <!-- list here -->
+            <div class="candidates-list">
+                @if (candidates().length === 0) {
+                    <div class="empty-state">
+                        <p>No candidates registered yet</p>
+                    </div>
+                } @else {
+                    @for (candidate of displayedCandidates(); track candidate.id) {
+                        <div class="candidate-item">
+                            <div class="candidate-info">
+                                <span class="candidate-name">{{candidate.name}} {{candidate.lastName}}</span>
+                                <span class="votes-count">{{candidate.receivedVotesCount}} votes</span>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="pagination">
+                        <button class="pagination-btn" [disabled]="currentCandidatePage() === 1" (click)="previousCandidatePage()">
+                            Previous
+                        </button>
+                        <span class="page-info">
+                            Page {{currentCandidatePage()}} of {{totalCandidatePages()}}
+                        </span>
+                        <button class="pagination-btn" [disabled]="currentCandidatePage() === totalCandidatePages()" (click)="nextCandidatePage()">
+                            Next
+                        </button>
+                    </div>
+                }
             </div>
         }
     </div>
@@ -14,11 +39,39 @@
     <div class="card">
         <h3 class="text-xl font-bold mb-4">Registered Votes 🗳️</h3>
 
-        @if (loading()) {
+        @if (loadingVotes()) {
             <p>Loading activity...</p>
         } @else {
-            <div>
-                <!-- list here -->
+            <div class="votes-list">
+                @if (votes().length === 0) {
+                    <div class="empty-state">
+                        <p>No votes registered yet</p>
+                    </div>
+                } @else {
+                    @for (vote of displayedVotes(); track vote.id) {
+                        <div class="vote-item">
+                            <div class="vote-info">
+                                <div class="voter-details">
+                                    <span class="voter-name">{{vote.voter.name}} {{vote.voter.lastName}}</span>
+                                    <span class="vote-date">{{vote.date | date:'medium'}}</span>
+                                </div>
+                                <span class="candidate-voted">Voted for: {{vote.candidate.name}} {{vote.candidate.lastName}}</span>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="pagination">
+                        <button class="pagination-btn" [disabled]="currentVotePage() === 1" (click)="previousVotePage()">
+                            Previous
+                        </button>
+                        <span class="page-info">
+                            Page {{currentVotePage()}} of {{totalVotePages()}}
+                        </span>
+                        <button class="pagination-btn" [disabled]="currentVotePage() === totalVotePages()" (click)="nextVotePage()">
+                            Next
+                        </button>
+                    </div>
+                }
             </div>
         }
     </div>
